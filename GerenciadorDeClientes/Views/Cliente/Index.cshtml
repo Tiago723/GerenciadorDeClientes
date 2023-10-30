@@ -1,0 +1,192 @@
+﻿
+@model GerenciadorDeClientes.Models.ClienteViewModel
+
+<style>
+    #cabeçalho {
+        background-color: #555;
+        color: #fff;
+    }
+
+    #cabeçalho_EditExc {
+        text-align: center;
+    }
+
+    #edit {
+        text-align: center;
+    }
+
+    #delet {
+        text-align: center;
+    }
+
+    #footer {
+        display: none;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            @{
+                if (TempData["Erro"] != null)
+                {
+                    <p class="alert alert-danger">@TempData["Erro"]</p>
+                }
+
+                if (TempData["sucesso_cad"] != null)
+                {
+                    <script src="~/Scripts/sweetalert2.all.min.js"></script>
+                    <script>
+                        swal({
+                            title: "Exito",
+                            text: "cadastro realizado com sucesso.",
+                            type: "success"
+                        }).then(function () {
+                            window.location.href = 'Cliente/Index';
+                        });
+                    </script>
+                }
+
+                if (TempData["AtualizacaoDeDados"] != null)
+                {
+                    <script src="~/Scripts/sweetalert2.all.min.js"></script>
+                    <script>
+                        swal({
+                            title: "Exito",
+                            text: "Dados atualizados com sucesso.",
+                            type: "success"
+                        }).then(function () {
+                            window.location.href = 'Cliente/Index';
+                        });
+                    </script>
+                }
+
+                if (TempData["DeletaCliente"] != null)
+                {
+                    <script src="~/Scripts/sweetalert2.all.min.js"></script>
+                    <script>
+                        swal({
+                            title: "Exito",
+                            text: "Cliente excluído com sucesso.",
+                            type: "success"
+                        }).then(function () {
+                            window.location.href = 'Cliente/Index';
+                        });
+                    </script>
+                }
+
+                // Limpa os valores dos TempData
+                TempData["sucesso_cad"] = null;
+                TempData["Erro"] = null;
+                TempData["AtualizacaoDeDados"] = null;
+                TempData["DeletaCliente"] = null;
+            }
+            <center><h4><b>CLIENTES CADASTRADOS</b></h4></center>
+
+            <!-- Modal -->
+            <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header mx-auto d-block">
+                            <h1 class="modal-title fs-5" id="deleteModalLabel"></h1>
+                            <img src="~/Icones/cancel.png" class="img-fluid" width="80" />
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body mx-auto d-block">
+                            <h5>Deseja excluir esse cliente?</h5>
+                            <p>Você não será capaz de reverter isso!</p>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-success" id="confirmDeleteButton">Excluir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a href="~/Cliente/Novo" class="btn btn-primary btn-sm">Novo</a>
+            <table class="table table-bordered table-responsive-xxl table-hover">
+                <input type="text" id="filtro" class="form-control" placeholder="Digite para filtrar" style="margin:5px;">
+                <thead>
+                    <tr id="cabeçalho">
+                        <th class="col-1">Id</th>
+                        <th class="col-3">Nome</th>
+                        <!--<th>Tel</th>-->
+                        <!--<th>E-mail</th>-->
+                        <th id="cabeçalho_EditExc" class="col-1 coluna_Editar">VER/EDITAR</th>
+                        <th id="cabeçalho_EditExc" class="col-1">Excluir</th>
+                        <th id="cabeçalho_EditExc" class="col-1">GERAR PDF</th>
+                    </tr>
+                </thead>
+                <tbody id="dadosTabela">
+                    @foreach (var cliente in Model.Resultado)
+                    {
+                        <tr>
+                            <td class="col-1">@cliente.Id</td>
+                            <td class="col-3">@cliente.Nome</td>
+                            <!--<td>cliente.Tel</td>-->
+                            <!--<td>cliente.Email</td>-->
+                            <td id="edit" class="col-1"><a href="~/Cliente/Editar/@cliente.Id"><img src="~/Imagens/hidden.png" class="img-fluid" width="35" /></a></td>
+                            <!--<td id="delet" class="col-1"><a href="~/Cliente/Excluir/cliente.Id"><img src="~/Imagens/lixeira.png" class="img-fluid" width="35" /></a></td>-->
+                            <td id="delet" class="col-1"><a href="#" onclick="showDeleteModal('@cliente.Id')"><img src="~/Imagens/lixeira.png" class="img-fluid" width="35" /></a></td>
+                            <!--<td id="cabeçalho_EditExc" class="col-1"><a href="~/Cliente/GeraPDF/@cliente.Id"><img src="~/Imagens/IconePDF.png" width="35" class="img-fluid" /></a></td>-->
+                            <!--<td id="cabeçalho_EditExc" class="col-1"><a href="http://10.60.51.68/pmesp_api_template2/Api/Pessoa/Relatorio?Id=@cliente.Id" target="_blank"><img src="~/Imagens/IconePDF.png" width="35" class="img-fluid" /></a></td>-->
+
+                            <td id="cabeçalho_EditExc" class="col-1">
+                                <form action="~/Cliente/Relatorio/@cliente.Id" method="post" id="FormCadastroCliente" target="_blank">
+                                    @{
+                                        <button type="submit">teste</button>
+                                    }
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </table>
+                        </div>
+                    </div>
+                </div>
+
+<script>
+    document.getElementById('filtro').addEventListener('input', function () {
+        var filtro = this.value.toLowerCase();
+        var linhas = document.querySelectorAll('#dadosTabela tr');
+
+        for (var i = 0; i < linhas.length; i++) {
+            var colunas = linhas[i].querySelectorAll('td');
+            var correspondencia = false;
+
+            for (var j = 0; j < colunas.length; j++) {
+                var texto = colunas[j].innerText.toLowerCase();
+
+                if (texto.includes(filtro)) {
+                    correspondencia = true;
+                    break;
+                }
+            }
+
+            linhas[i].style.display = correspondencia ? 'table-row' : 'none';
+        }
+    });
+
+    function showDeleteModal(clienteId) {
+        var confirmButton = document.getElementById('confirmDeleteButton');
+
+        // Defina a ação do botão de exclusão para chamar a função confirmFormSubmission com o clienteId
+        confirmButton.onclick = function () {
+            confirmFormSubmission(clienteId);
+        };
+
+        // Exiba o modal
+        var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        deleteModal.show();
+    }
+
+    function confirmFormSubmission(clienteId) {
+        // Enviar uma requisição GET para o controller com o clienteId
+        window.location.href = "DeletaCliente/" + clienteId;
+    }
+</script>
+
+
+
+

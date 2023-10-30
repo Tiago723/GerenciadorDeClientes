@@ -1,0 +1,81 @@
+﻿
+@model GerenciadorDeClientes.Models.ClienteViewModel
+
+<style>
+    #cabeçalho {
+        background-color: #555;
+        color: #fff;
+    }
+
+    #cabeçalho_EditExc {
+        text-align: center;
+    }
+
+    #edit {
+        text-align: center;
+    }
+
+    #delet {
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <center>
+                <h4><b>EDITAR CLIENTE</b></h4>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header mx-auto d-block">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel"></h1>
+                                <img src="~/Icones/danger.png" class="img-fluid" width="90" />
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Deseja atualizar os dados?</h5>
+                                <p>Você não será capaz de reverter isso!</p>
+                            </div>
+                            <div class="modal-footer justify-content-center">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-success" onclick="return confirmFormSubmission()">Alterar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="~/Cliente/AlteraDadosCliente" method="post" id="FormCadastroCliente">
+                    @{
+                        foreach (var cliente in Model.Resultado)
+                        {
+                            <input type="hidden" name="id" value="@cliente.Id" required="required" /><br />
+                            <input type="text" name="nome" value="@cliente.Nome" required="required" /><br />
+                            <input type="text" name="tel" value="@cliente.Tel" required="required" maxlength="15" id="telefone" /><br />
+                            <input type="text" name="email" value="@cliente.Email" required="required" /><br />
+                        }
+                    }
+
+                    <a href="~/Cliente/Index" class="btn btn-secondary">Voltar</a>
+                    <input type="button" class="btn btn-danger" value="Atualizar" data-bs-toggle="modal" data-bs-target="#staticBackdrop" />
+                </form>
+            </center>
+        </div>
+    </div>
+</div>
+
+<script>
+    function confirmFormSubmission() {
+        document.getElementById("FormCadastroCliente").submit();
+    }
+</script>
+
+@Scripts.Render("~/Scripts/Mascaras.js")
+@Styles.Render("~/Content/Estilos.css")
+
+
+
+
+

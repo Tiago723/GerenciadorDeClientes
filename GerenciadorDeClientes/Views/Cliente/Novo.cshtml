@@ -1,0 +1,50 @@
+﻿
+@model GerenciadorDeClientes.Models.ClienteViewModel
+
+<style>
+    #cabeçalho {
+        background-color: #555;
+        color: #fff;
+    }
+
+    #cabeçalho_EditExc {
+        text-align: center;
+    }
+
+    #edit {
+        text-align: center;
+    }
+
+    #delet {
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <center>
+                <h4><b>CADASTRO DE CLIENTES</b></h4>
+
+                <form action="~/Cliente/CadastrarCliente" method="post" id="FormCadastroCliente">
+                    <input type="text" name="nome" placeholder="Digite o nome" required="required" autofocus /><br />
+                    <input type="text" name="tel" placeholder="Digite o Tel" maxlength="15" id="telefone" /><br />
+                    <input type="text" name="email" placeholder="Digite o e-mail" required="required" /><br />
+
+                    <a href="~/Cliente/Index" class="btn btn-secondary">Voltar</a>
+                    <input type="submit" class="btn btn-primary" value="Cadastrar" />
+                </form>
+            </center>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/Scripts/Mascaras.js")
+@Styles.Render("~/Content/Estilos.css")
+
+
+
+
+
+
+

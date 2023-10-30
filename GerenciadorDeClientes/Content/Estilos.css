@@ -1,0 +1,147 @@
+﻿
+#FormCadastroCliente input {
+    margin: 3px;
+}
+
+#FormLogin {
+    border: 1px solid #000;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px 2px;
+    width: 100%;
+    padding: 10px;
+    background-color: #d5d5af;
+    position: relative;
+    top: 100px;
+    margin: 5px;
+}
+
+#FormLogin input {
+    margin: 10px;
+    max-width: 90%;
+}
+
+html{min-height:100%;}
+
+#FormLogin #botãoEnviar {
+    width: 90%;
+}
+
+#logout {
+    float: right;
+    list-style: none;
+    position: relative;
+    margin-right: 30px;
+    top: 12px;
+}
+
+#logout a {
+    color: #a6a6a6;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+#logout a:hover {
+    color: #fff;
+}
+
+#Esconder {
+    display: none;
+}
+
+#footer {
+    background-color: #555;
+    position: fixed;
+    bottom:0;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    height: 80px;
+}
+
+#footer p {
+    position: relative;
+    top: 25%;
+    font-size: 22px;
+}
+
+#linha {
+    width: 80%;
+}
+#PaginaçãoBorda {
+    padding: 5px;
+    border: 1px solid #000;
+    text-decoration: none;
+}
+#PaginaçãoBorda:hover {
+    background-color: #555;
+    transition-duration: 0.3s;
+}
+#Paginação {
+    margin: 2px;
+}
+#Paginação a:hover {
+    color: #fff;
+}
+
+.btnConfirmEdicao{
+    margin:5px;
+}
+
+.boasVindas {
+    position: relative;
+    top: 100px;
+    margin: 5px;
+    font-size: 32px;
+    text-align: justify;
+}
+
+.titulo {
+    position: relative;
+    top: 100px;
+    margin: 5px;
+    font-size: 32px;
+    text-align: justify;
+}
+.btn-close {
+    position: relative;
+    float: right;
+    left: 170px;
+    border:1px solid #000;
+}
+
+@media (min-width: 360px) and (max-width: 768px) {
+    #FormLogin {
+        width: 100%;
+        position: relative;
+        top: 30px;
+        margin: 0px;
+    }
+
+    #FormLogin input {
+        position: relative;
+        left: -5px;
+    }
+
+    .titulo {
+        position: relative;
+        top: 0px;
+        margin: 5px;
+        font-size: 18px;
+        padding: 0px;
+    }
+
+    .boasVindas {
+        position: relative;
+        top: 0px;
+        margin: 5px;
+        font-size: 18px;
+        padding: 0px;
+    }
+
+    #linha {
+        width: 100%;
+    }
+}
+
+@media (min-width: 360px) and (max-width: 1199.98px) {
+}

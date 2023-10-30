@@ -1,0 +1,74 @@
+﻿
+@model GerenciadorDeClientes.Models.ClienteViewModel
+
+<style>
+    #logout {
+       display:none;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            @{
+                if (TempData["AcessoNegado"] != null)
+                {
+                    <script src="~/Scripts/sweetalert2.all.min.js"></script>
+                    <script>
+                        swal({
+                            title: "Atenção",
+                            text: "Usuário ou senha inválidos",
+                            type: "error"
+                        }).then(function () {
+                            window.location.href = 'Home/Index';
+                        });
+                    </script>
+                }
+
+                if (TempData["FalhaDeServiço"] != null)
+                {
+                    <script src="~/Scripts/sweetalert2.all.min.js"></script>
+                    <script>
+                        swal({
+                            title: "Atenção",
+                            text: "Falha no serviço",
+                            type: "error"
+                        }).then(function () {
+                            window.location.href = 'Home/Index';
+                        });
+                    </script>
+                }
+
+                TempData["AcessoNegado"] = null;
+                TempData["FalhaDeServiço"] = null;
+            }
+        </div>
+    </div>
+    <center>
+        <div class="row" id="linha">
+            <br /><br />
+            <div class="col-lg-7">
+                <h4 class="titulo"><b>Gerenciador de clientes</b></h4>
+                <p class="boasVindas">
+                    O Gerenciador de clientes ajuda você a gerenciar e compartilhar com as pessoas que fazem parte da sua vida.
+                </p>
+            </div>
+            <div class="col-lg">
+                <center>
+                    <form action="~/Login/ValidaLogin" method="post" id="FormLogin">
+                        <h4><b>LOGIN DE ADM</b></h4>
+                        <input type="text" class="form-control form-control-lg" name="usuario" placeholder="Digite seu usuário" required="required" autofocus />
+                        <input type="password" class="form-control form-control-lg" name="senha" placeholder="Digite sua senha" required="required" />
+                        <div id="emailHelp" class="form-text">Sua senha deve ter de 8 a 20 caracteres e conter letras e números.</div>
+
+                        <a href="~/Cliente/Index"><input type="submit" class="btn btn-primary" value="Acessar" id="botãoEnviar" /><br /><br /></a>
+                    </form>
+                </center>
+            </div>
+        </div>
+    </center>
+</div>
+
+
+
+
